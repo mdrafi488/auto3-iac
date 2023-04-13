@@ -44,3 +44,14 @@ resource "aws_instance" "apache" {
     Name = "Stage-Apache"
   }
 }
+
+resource "aws_instance" "grafana" {
+  ami             = "ami-04ddf30efb5385f93"
+  instance_type   = "t2.micro"
+  subnet_id       = aws_subnet.private[0].id
+  security_groups = [aws_security_group.apache.id]
+
+  tags = {
+    Name = "Stage-grafana"
+  }
+}
